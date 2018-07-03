@@ -79,7 +79,7 @@ class DrupalMemcache extends DrupalMemcacheBase {
    * {@inheritdoc}
    */
   public function getMulti(array $keys) {
-    $full_keys = array();
+    $full_keys = [];
 
     foreach ($keys as $cid) {
       $full_key = $this->key($cid);
@@ -90,11 +90,11 @@ class DrupalMemcache extends DrupalMemcacheBase {
 
     // If $results is FALSE, convert it to an empty array.
     if (!$results) {
-      $results = array();
+      $results = [];
     }
 
     // Convert the full keys back to the cid.
-    $cid_results = array();
+    $cid_results = [];
 
     // Order isn't guaranteed, so ensure the return order matches that
     // requested. So base the results on the order of the full_keys, as they
