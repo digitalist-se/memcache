@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Memcache Admin event subscriber.
- */
-
 namespace Drupal\memcache_admin\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,7 +16,7 @@ class MemcacheAdminSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  static function getSubscribedEvents() {
+  public static function getSubscribedEvents() {
     $events[KernelEvents::RESPONSE][] = ['display_statistics'];
     return $events;
   }
@@ -40,7 +36,7 @@ class MemcacheAdminSubscriber implements EventSubscriberInterface {
     //   in_array($_GET['q'], array('upload/js', 'admin/content/node-settings/rebuild'))
     // @todo validate these checks
     if ($user->id() == 0) {
-      // suppress for the above criteria.
+      // Suppress for the above criteria.
     }
     else {
       $response = $event->getResponse();
@@ -52,8 +48,7 @@ class MemcacheAdminSubscriber implements EventSubscriberInterface {
       // @todo make sure this is not still a requirement.
       // if (!function_exists('theme_get_registry') || !theme_get_registry()) {
       //   return;
-      // }
-
+      // }.
       // Try not to break non-HTML pages.
       if ($response instanceof HTMLResponse) {
 
@@ -132,4 +127,5 @@ class MemcacheAdminSubscriber implements EventSubscriberInterface {
       return $a / ($a + $b) * 100;
     }
   }
+
 }

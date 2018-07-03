@@ -2,8 +2,6 @@
 
 namespace Drupal\memcache;
 
-use Psr\Log\LogLevel;
-
 /**
  * Class DrupalMemcache.
  */
@@ -70,7 +68,7 @@ class DrupalMemcache extends DrupalMemcacheBase {
     $full_key = $this->key($key);
     $result = $this->memcache->set($full_key, $value, $flag, $exp);
     if ($collect_stats) {
-      $this->stats_write('set', 'cache', [$full_key => (int)$result]);
+      $this->stats_write('set', 'cache', [$full_key => (int) $result]);
     }
     return $result;
   }
@@ -81,11 +79,11 @@ class DrupalMemcache extends DrupalMemcacheBase {
   public function getMulti(array $keys) {
     $collect_stats = $this->stats_init();
     $multi_stats   = [];
-    $full_keys = [];
+    $full_keys     = [];
 
     foreach ($keys as $key => $cid) {
-           $full_key = $this->key($cid);
-           $full_keys[$cid] = $full_key;
+      $full_key = $this->key($cid);
+      $full_keys[$cid] = $full_key;
       if ($collect_stats) {
         $multi_stats[$key] = FALSE;
       }
