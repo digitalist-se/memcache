@@ -27,15 +27,15 @@ is important.
  2. Enable the memcache module.
     You need to enable the module in Drupal before you can configure it to run
     as the default backend. This is so Drupal knows where to find everything.
- 2. Edit settings.php to configure the servers, clusters and bins that memcache
+ 3. Edit settings.php to configure the servers, clusters and bins that memcache
     is supposed to use. You do not need to set this if the only memcache backend
     is localhost on port 11211. By default the main settings will be:
       $settings['memcache']['servers'] = ['127.0.0.1:11211' => 'default'];
       $settings['memcache']['bins'] = ['default' => 'default'];
       $settings['memcache']['key_prefix'] = '';
- 7. Edit settings.php to make memcache the default cache class, for example:
+ 4. Edit settings.php to make memcache the default cache class, for example:
       $settings['cache']['default'] = 'cache.backend.memcache';
- 8. If you wish to arbitrarily send cache bins to memcache, then you can do the
+ 5. If you wish to arbitrarily send cache bins to memcache, then you can do the
     following. E.g. for the cache_render bin:
       $settings['cache']['bins']['render'] = 'cache.backend.memcache';
 
