@@ -2,7 +2,6 @@
 
 namespace Drupal\memcache;
 
-
 /**
  * Class DrupalMemcached.
  */
@@ -66,7 +65,7 @@ class DrupalMemcached extends DrupalMemcacheBase {
     $full_key = $this->key($key);
     $result = $this->memcache->set($full_key, $value, $exp);
     if ($collect_stats) {
-      $this->stats_write('set', 'cache', [$full_key => (int)$result]);
+      $this->stats_write('set', 'cache', [$full_key => (int) $result]);
     }
     return $result;
   }
@@ -76,7 +75,7 @@ class DrupalMemcached extends DrupalMemcacheBase {
    */
   public function getMulti(array $keys) {
     $collect_stats = $this->stats_init();
-    $multi_stats  = [];
+    $multi_stats = [];
     $full_keys = [];
 
     foreach ($keys as $key => $cid) {

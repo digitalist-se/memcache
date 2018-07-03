@@ -71,7 +71,7 @@ abstract class DrupalMemcacheBase implements DrupalMemcacheInterface {
     $result   = $this->memcache->get($full_key);
 
     if ($collect_stats) {
-      $this->stats_write('get', 'cache', array($full_key => (bool)$result));
+      $this->stats_write('get', 'cache', [$full_key => (bool) $result]);
     }
 
     return $result;
@@ -137,7 +137,7 @@ abstract class DrupalMemcacheBase implements DrupalMemcacheInterface {
 
     // The stats_type can be over-loaded with an integer slab id, if doing a
     // cachedump.  We know we're doing a cachedump if $slab is non-zero.
-    $slab  = (int) $stats_type;
+    $slab = (int) $stats_type;
     $stats = [];
 
     foreach ($this->get_bins() as $bin => $target) {
@@ -173,14 +173,14 @@ abstract class DrupalMemcacheBase implements DrupalMemcacheInterface {
     if ($aggregate) {
 
       // Some variables don't logically aggregate.
-      $no_aggregate = array(
+      $no_aggregate = [
         'pid',
         'time',
         'version',
         'pointer_size',
         'accepting_conns',
         'listen_disabled_num',
-      );
+      ];
 
       foreach ($stats as $bin => $servers) {
         if (is_array($servers)) {
@@ -267,7 +267,7 @@ abstract class DrupalMemcacheBase implements DrupalMemcacheInterface {
     static $drupal_static_fast;
 
     if (!isset($drupal_static_fast)) {
-      $drupal_static_fast = &drupal_static(__FUNCTION__, array('variable_checked' => NULL, 'user_access_checked' => NULL));
+      $drupal_static_fast = &drupal_static(__FUNCTION__, ['variable_checked' => NULL, 'user_access_checked' => NULL]);
     }
     $variable_checked    = &$drupal_static_fast['variable_checked'];
     $user_access_checked = &$drupal_static_fast['user_access_checked'];
@@ -313,15 +313,15 @@ abstract class DrupalMemcacheBase implements DrupalMemcacheInterface {
 
     // Build the 'all' and 'ops' arrays displayed by memcache_admin.module.
     foreach ($keys as $key => $success) {
-      self::$stats['all'][] = array(
+      self::$stats['all'][] = [
         number_format($time, 2),
         $action,
         $bin,
         $key,
         $success ? 'hit' : 'miss',
-      );
+      ];
       if (!isset(self::$stats['ops'][$action])) {
-        self::$stats['ops'][$action] = array($action, 0, 0, 0);
+        self::$stats['ops'][$action] = [$action, 0, 0, 0];
       }
       self::$stats['ops'][$action][1] += $time;
       if ($success) {
@@ -332,4 +332,5 @@ abstract class DrupalMemcacheBase implements DrupalMemcacheInterface {
       }
     }
   }
+
 }

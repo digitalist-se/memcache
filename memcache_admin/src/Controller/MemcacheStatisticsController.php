@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache_admin\Controller\MemcacheStatisticsController.
- */
-
 namespace Drupal\memcache_admin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
@@ -26,7 +21,7 @@ class MemcacheStatisticsController extends ControllerBase {
    *   The page output.
    */
   public function stats_table($bin = 'default') {
-    $output  = [];
+    $output = [];
     $servers = [];
 
     // Get the statistics.
@@ -40,14 +35,14 @@ class MemcacheStatisticsController extends ControllerBase {
       $additional_message = $this->t(
         '@enable the memcache module',
         [
-          '@enable' => l(t('enable'), 'admin/modules', ['fragment' => 'edit-modules-performance-and-scalability'])
+          '@enable' => l(t('enable'), 'admin/modules', ['fragment' => 'edit-modules-performance-and-scalability']),
         ]
       );
       if (module_exists('memcache')) {
         $additional_message = $this->t(
           'visit the Drupal admin @status page',
           [
-            '@status' => l(t('status report'), 'admin/reports/status')
+            '@status' => l(t('status report'), 'admin/reports/status'),
           ]
         );
       }
@@ -186,7 +181,7 @@ class MemcacheStatisticsController extends ControllerBase {
    */
   public function stats_table_raw($cluster, $server, $type = 'default') {
     $cluster = $this->bin_mapping($cluster);
-    $server  = str_replace('!', '/', $server);
+    $server = str_replace('!', '/', $server);
 
     // @todo - pull slab stats for Memcache
     // $slab = (int) arg(7);
@@ -194,10 +189,9 @@ class MemcacheStatisticsController extends ControllerBase {
     //   $stats = dmemcache_stats($cluster, arg(7), FALSE);
     // }
     // else {
-      $memcache = \Drupal::service('memcache.factory')->get($cluster, TRUE);
-      $stats    = $memcache->stats($cluster, $type, FALSE);
-    // }
-
+    $memcache = \Drupal::service('memcache.factory')->get($cluster, TRUE);
+    $stats    = $memcache->stats($cluster, $type, FALSE);
+    // }.
     // @todo - breadcrumb
     // $breadcrumbs = array(
     //   l(t('Home'), NULL),
@@ -287,7 +281,7 @@ class MemcacheStatisticsController extends ControllerBase {
         '@average' => number_format($average, 2),
         '@sets'    => number_format($sets, 2),
         '@set'     => number_format($stats['cmd_set']),
-        '@total'   => number_format($stats['cmd_set'] + $stats['cmd_get'])
+        '@total'   => number_format($stats['cmd_set'] + $stats['cmd_get']),
       ]
     );
   }
@@ -317,7 +311,7 @@ class MemcacheStatisticsController extends ControllerBase {
         '@percent_hit'  => ($stats['cmd_get'] > 0 ? number_format($stats['get_hits'] / $stats['cmd_get'] * 100, 2) : '0.00'),
         '@miss'         => number_format($stats['get_misses']),
         '@percent_miss' => ($stats['cmd_get'] > 0 ? number_format($stats['get_misses'] / $stats['cmd_get'] * 100, 2) : '0.00'),
-        '@total'        => number_format($stats['cmd_get'])
+        '@total'        => number_format($stats['cmd_get']),
       ]
     );
   }
@@ -341,7 +335,7 @@ class MemcacheStatisticsController extends ControllerBase {
       '@incr increments, @decr decrements',
       [
         '@incr' => number_format($stats['incr_hits'] + $stats['incr_misses']),
-        '@decr' => number_format($stats['decr_hits'] + $stats['decr_misses'])
+        '@decr' => number_format($stats['decr_hits'] + $stats['decr_misses']),
       ]
     );
   }
@@ -361,7 +355,7 @@ class MemcacheStatisticsController extends ControllerBase {
       [
         '@to'      => format_size((int) $stats['bytes_read']),
         '@from'    => format_size((int) $stats['bytes_written']),
-        '@written' => number_format($written, 2)
+        '@written' => number_format($written, 2),
       ]
     );
   }
@@ -388,7 +382,7 @@ class MemcacheStatisticsController extends ControllerBase {
         '@get'   => number_format($get, 2),
         '@set'   => number_format($set, 2),
         '@read'  => format_size(number_format($read, 2)),
-        '@write' => format_size(number_format($write, 2))
+        '@write' => format_size(number_format($write, 2)),
       ]
     );
   }
@@ -408,7 +402,7 @@ class MemcacheStatisticsController extends ControllerBase {
       [
         '@available' => format_size($stats['limit_maxbytes'] - $stats['bytes']),
         '@percent'   => number_format($percent, 2),
-        '@total'     => format_size($stats['limit_maxbytes'])
+        '@total'     => format_size($stats['limit_maxbytes']),
       ]
     );
   }
@@ -552,4 +546,5 @@ class MemcacheStatisticsController extends ControllerBase {
 
     return $output;
   }
+
 }
