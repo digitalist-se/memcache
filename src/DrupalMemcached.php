@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\DrupalMemcached.
- */
-
 namespace Drupal\memcache;
 
 /**
@@ -46,7 +41,7 @@ class DrupalMemcached extends DrupalMemcacheBase {
     list($host, $port) = explode(':', $server_path);
 
     if ($host == 'unix') {
-      // Memcached expects just the path to the socket without the protocol
+      // Memcached expects just the path to the socket without the protocol.
       $host = substr($server_path, 7);
       // Port is always 0 for unix sockets.
       $port = 0;
@@ -83,7 +78,8 @@ class DrupalMemcached extends DrupalMemcacheBase {
 
     if (PHP_MAJOR_VERSION === 7) {
       $results = $this->memcache->getMulti($full_keys, \Memcached::GET_PRESERVE_ORDER);
-    } else {
+    }
+    else {
       $cas_tokens = NULL;
       $results = $this->memcache->getMulti($full_keys, $cas_tokens, \Memcached::GET_PRESERVE_ORDER);
     }

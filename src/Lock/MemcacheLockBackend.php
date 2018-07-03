@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\MemcacheLockBackend.
- */
-
 namespace Drupal\memcache\Lock;
 
 use Drupal\Core\Lock\LockBackendAbstract;

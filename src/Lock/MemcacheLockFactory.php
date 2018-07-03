@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\Lock\MemcacheLockFactory.
- */
-
 namespace Drupal\memcache\Lock;
 
 use Drupal\memcache\DrupalMemcacheFactory;

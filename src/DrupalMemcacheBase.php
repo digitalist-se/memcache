@@ -1,13 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\DrupalMemcacheBase.
- */
-
 namespace Drupal\memcache;
-
-use Psr\Log\LogLevel;
 
 /**
  * Class DrupalMemcacheBase.
@@ -30,7 +23,7 @@ abstract class DrupalMemcacheBase implements DrupalMemcacheInterface {
   protected $memcache;
 
   /**
-   * The hash algorithm to pass to hash(). Defaults to 'sha1'
+   * The hash algorithm to pass to hash(). Defaults to 'sha1'.
    *
    * @var string
    */

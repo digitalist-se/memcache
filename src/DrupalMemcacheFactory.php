@@ -1,13 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\DrupalMemcacheFactory.
- */
-
 namespace Drupal\memcache;
-
-use Psr\Log\LogLevel;
 
 /**
  * Factory class for creation of Memcache objects.
@@ -162,7 +155,7 @@ class DrupalMemcacheFactory {
       throw new MemcacheException('No Memcache extension found');
     }
 
-    // Values from settings.php
+    // Values from settings.php.
     $this->memcacheServers = $this->settings->get('servers', ['127.0.0.1:11211' => 'default']);
     $this->memcacheBins = $this->settings->get('bins', ['default' => 'default']);
 

@@ -1,13 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\DrupalMemcache.
- */
-
 namespace Drupal\memcache;
-
-use Psr\Log\LogLevel;
 
 /**
  * Class DrupalMemcache.

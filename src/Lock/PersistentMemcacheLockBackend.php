@@ -1,14 +1,12 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\PersistentMemcacheLockBackend.
- */
-
 namespace Drupal\memcache\Lock;
 
 use Drupal\memcache\DrupalMemcacheInterface;
 
+/**
+ *
+ */
 class PersistentMemcacheLockBackend extends MemcacheLockBackend {
 
   /**

@@ -1,12 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\MemcacheBackend.
- */
-
 namespace Drupal\memcache;
 
+use Drupal\Component\Assertion\Inspector;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Cache\CacheTagsChecksumInterface;
 use Drupal\Core\Lock\LockBackendInterface;
@@ -60,7 +56,8 @@ class MemcacheBackend implements CacheBackendInterface {
 
   /**
    * Constructs a MemcacheBackend object.
-   *\Drupal\Core\Site\Settings
+   * \Drupal\Core\Site\Settings.
+   *
    * @param string $bin
    *   The bin name.
    * @param \Drupal\memcache\DrupalMemcacheInterface $memcache
@@ -93,7 +90,7 @@ class MemcacheBackend implements CacheBackendInterface {
    * {@inheritdoc}
    */
   public function getMultiple(&$cids, $allow_invalid = FALSE) {
-    $keys = array_map(function($cid) {
+    $keys = array_map(function ($cid) {
       return $this->key($cid);
     }, $cids);
 
@@ -166,7 +163,7 @@ class MemcacheBackend implements CacheBackendInterface {
           // The memcache_stampede_semaphore variable was used in previous
           // releases of memcache, but the max_wait variable was not, so by
           // default divide the semaphore value by 3 (5 seconds).
-         $this->lock->wait($lock_key, $this->settings->get('stampede_wait_time', 5));
+          $this->lock->wait($lock_key, $this->settings->get('stampede_wait_time', 5));
           $cache = $this->get($cid);
         }
       }
@@ -183,8 +180,8 @@ class MemcacheBackend implements CacheBackendInterface {
   /**
    * {@inheritdoc}
    */
-  public function set($cid, $data, $expire = CacheBackendInterface::CACHE_PERMANENT, array $tags = array()) {
-    assert(\Drupal\Component\Assertion\Inspector::assertAllStrings($tags));
+  public function set($cid, $data, $expire = CacheBackendInterface::CACHE_PERMANENT, array $tags = []) {
+    assert(Inspector::assertAllStrings($tags));
     $tags = array_unique($tags);
     // Sort the cache tags so that they are stored consistently.
     sort($tags);

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\memcache\Tests\MemcacheBackendUnitTest.
- */
-
 namespace Drupal\memcache\Tests;
 
 use Drupal\memcache\MemcacheBackendFactory;
