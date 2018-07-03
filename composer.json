@@ -1,10 +1,10 @@
 {
-  "name": "drupal/memcache",
+  "name": "nodeone/memcache",
   "description": "High performance integration with memcache.",
   "type": "drupal-module",
-  "homepage": "http://drupal.org/project/memcache",
+  "homepage": "https://github.com/nodeone/memcache",
   "support": {
-    "issues": "https://www.drupal.org/project/issues/memcache"
+    "issues": "https://github.com/nodeone/memcache/issues"
   },
   "license": "GPL-2.0+",
   "require": { }

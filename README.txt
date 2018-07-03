@@ -1,13 +1,13 @@
 ## IMPORTANT NOTE ##
 
-This file contains installation instructions for the 8.x-1.x version of the
+This file contains installation instructions for the 8.x-3.x version of the
 Drupal Memcache module. Configuration differs between 8.x and 7.x versions
 of the module, so be sure to follow the 7.x instructions if you are configuring
 the 7.x-1.x version of this module!
 
 ## REQUIREMENTS ##
 
-- PHP 5.5 or greater
+- PHP 5.6 or greater
 - Availability of a memcached daemon: http://memcached.org/
 - One of the two PECL memcache packages:
   - http://pecl.php.net/package/memcache (recommended)
