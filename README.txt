@@ -1,3 +1,9 @@
+## Fork ##
+
+This module is a fork of https://www.drupal.org/project/memcache with the hope
+to get a stable release out on drupal.org. I offered to maintain the module in
+the beginning of 2017. https://www.drupal.org/project/memcache/issues/2856031
+
 ## IMPORTANT NOTE ##
 
 This file contains installation instructions for the 8.x-3.x version of the
