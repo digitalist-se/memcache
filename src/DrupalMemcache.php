@@ -2,6 +2,8 @@
 
 namespace Drupal\memcache;
 
+use Psr\Log\LogLevel;
+
 /**
  * Class DrupalMemcache.
  */
@@ -64,26 +66,41 @@ class DrupalMemcache extends DrupalMemcacheBase {
    * {@inheritdoc}
    */
   public function set($key, $value, $exp = 0, $flag = FALSE) {
+    $collect_stats = $this->stats_init();
     $full_key = $this->key($key);
-    return $this->memcache->set($full_key, $value, $flag, $exp);
+    $result = $this->memcache->set($full_key, $value, $flag, $exp);
+    if ($collect_stats) {
+      $this->stats_write('set', 'cache', [$full_key => (int)$result]);
+    }
+    return $result;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getMulti(array $keys) {
+    $collect_stats = $this->stats_init();
+    $multi_stats   = [];
     $full_keys = [];
 
-    foreach ($keys as $cid) {
-      $full_key = $this->key($cid);
-      $full_keys[$cid] = $full_key;
+    foreach ($keys as $key => $cid) {
+           $full_key = $this->key($cid);
+           $full_keys[$cid] = $full_key;
+      if ($collect_stats) {
+        $multi_stats[$key] = FALSE;
+      }
     }
-
     $results = $this->memcache->get($full_keys);
 
     // If $results is FALSE, convert it to an empty array.
     if (!$results) {
       $results = [];
+    }
+
+    if ($collect_stats) {
+      foreach ($multi_stats as $key => $value) {
+        $multi_stats[$key] = isset($results[$key]) ? TRUE : FALSE;
+      }
     }
 
     // Convert the full keys back to the cid.
@@ -94,6 +111,10 @@ class DrupalMemcache extends DrupalMemcacheBase {
     // reflect the order of the $cids passed in.
     foreach (array_intersect($full_keys, array_keys($results)) as $cid => $full_key) {
       $cid_results[$cid] = $results[$full_key];
+    }
+
+    if ($collect_stats) {
+      $this->stats_write('getMulti', 'cache', $multi_stats);
     }
 
     return $cid_results;
