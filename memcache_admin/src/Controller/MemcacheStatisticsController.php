@@ -53,7 +53,7 @@ class MemcacheStatisticsController extends ControllerBase {
         t(
           'There may be a problem with your Memcache configuration. Please review @readme and :more for more information.',
           [
-            '@readme' => 'README.txt',
+            '@readme' => 'README.md',
             ':more'   => $additional_message,
           ]
         ),
