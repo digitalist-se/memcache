@@ -189,11 +189,13 @@ class MemcacheBackend implements CacheBackendInterface {
     // Create new cache object.
     $cache = new \stdClass();
     $cache->cid = $cid;
-    $cache->data = is_object($data) ? clone $data : $data;
+    $cache->data = $data;
     $cache->created = round(microtime(TRUE), 3);
     $cache->expire = $expire;
     $cache->tags = $tags;
     $cache->checksum = $this->checksumProvider->getCurrentChecksum($tags);
+    // Memcache serializes/unserializes any structure itself.
+    $cache->serialized = 0;
 
     // Cache all items permanently. We handle expiration in our own logic.
     return $this->memcache->set($this->key($cid), $cache);
